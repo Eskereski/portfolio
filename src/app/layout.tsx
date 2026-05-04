@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { LanguageProvider } from "@/lib/language-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,29 +22,47 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html
-      lang="pt-BR"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
-    >
-      <body className="flex min-h-full flex-col text-zinc-950 dark:text-white">
-        <div className="bg-linear-to-b dark:from-zinc-950 dark:to-zinc-900 w-full h-full absolute top-0 left-0 -z-10"></div>
-        <script dangerouslySetInnerHTML={{ __html: `
-          (function(){
-            try {
-              const isDark = document.documentElement.classList.contains('dark');
-              console.log('Theme detected:', isDark ? 'dark' : 'light');
-            } catch (e) {
-              console.log('Theme detection error', e);
-            }
-          })();
-        ` }} />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+    <html lang="pt-BR" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const before = document.documentElement.classList.contains('dark');
+                const saved = localStorage.getItem('theme');
+                let isDark;
+                
+                if (saved === 'dark' || saved === 'light') {
+                  isDark = saved === 'dark';
+                } else {
+                  isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                }
+                
+                if (isDark) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+
+                const after = document.documentElement.classList.contains('dark');
+                if (before !== after) {
+                  console.log('[theme]', after ? 'dark' : 'light');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
+      <body className="flex min-h-screen flex-col bg-white text-zinc-950 dark:bg-zinc-950 dark:bg-linear-to-b dark:from-zinc-950 dark:to-zinc-900 dark:text-white antialiased">
+        <LanguageProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );
