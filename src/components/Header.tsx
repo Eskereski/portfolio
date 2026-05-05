@@ -97,9 +97,6 @@ export default function Header() {
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-zinc-500 dark:text-zinc-400">
                   Menu
                 </p>
-                <span className="text-xs text-zinc-400 dark:text-zinc-500">
-                  Navegação
-                </span>
               </div>
 
               <div className="mt-8 flex flex-col gap-2">
@@ -116,7 +113,7 @@ export default function Header() {
                   </Link>
                 ))}
                 <div className="mt-4">
-                  <AnimatedThemeToggler className="w-full inline-flex items-center justify-center rounded-2xl border border-zinc-200 px-4 py-3 text-sm font-medium text-zinc-700 dark:border-zinc-800 dark:text-zinc-200" />
+                  <AnimatedThemeToggler className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 p-0 text-zinc-700 dark:border-zinc-800 dark:text-zinc-200" />
                 </div>
               </div>
             </motion.aside>
