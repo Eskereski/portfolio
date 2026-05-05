@@ -10,7 +10,12 @@ export default async function Projects() {
     
     console.log('[Projects Page] Constructed origin:', origin.replace(/https?:\/\//, '').split('/')[0]);
     
-    const res = await fetch(`${origin}/api/projects`, { next: { revalidate: 60 } });
+    const res = await fetch(`${origin}/api/projects`, { 
+      next: { revalidate: 60 },
+      headers: {
+        'User-Agent': 'Next.js Server Component',
+      }
+    });
     console.log('[Projects Page] Fetch status:', res.status, res.statusText);
     
     if (res.ok) {
