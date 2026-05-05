@@ -1,31 +1,10 @@
+import { getProjectsData } from '../../lib/github';
+
 export default async function Projects() {
   let projects: Array<any> = [];
   try {
-    const isProduction = !!process.env.VERCEL_URL;
-    console.log('[Projects Page] Running in:', isProduction ? 'production (Vercel)' : 'development (localhost)');
-    
-    const origin = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : `http://localhost:${process.env.PORT ?? 3000}`;
-    
-    console.log('[Projects Page] Constructed origin:', origin.replace(/https?:\/\//, '').split('/')[0]);
-    
-    const res = await fetch(`${origin}/api/projects`, { 
-      next: { revalidate: 60 },
-      headers: {
-        'User-Agent': 'Next.js Server Component',
-      }
-    });
-    console.log('[Projects Page] Fetch status:', res.status, res.statusText);
-    
-    if (res.ok) {
-      const data = await res.json();
-      projects = data.projects ?? [];
-      console.log('[Projects Page] Successfully loaded', projects.length, 'projects');
-    } else {
-      const errorText = await res.text();
-      console.error('[Projects Page] Failed to fetch /api/projects:', res.status, '-', errorText.slice(0, 200));
-    }
+    // Chamada direta à função executada no lado do servidor
+    projects = await getProjectsData();
   } catch (err) {
     console.error('[Projects Page] Error fetching projects:', err instanceof Error ? err.message : String(err));
   }

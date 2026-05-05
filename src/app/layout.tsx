@@ -53,11 +53,6 @@ export default function RootLayout({
                 } else {
                   document.documentElement.classList.remove('dark');
                 }
-
-                const after = document.documentElement.classList.contains('dark');
-                if (before !== after) {
-                  console.log('[theme]', after ? 'dark' : 'light');
-                }
               } catch (e) {}
             `,
           }}
