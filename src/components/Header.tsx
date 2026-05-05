@@ -72,11 +72,16 @@ export default function Header() {
 
       <AnimatePresence>
         {mobileMenuOpen ? (
-          <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60]"
+          >
             <button
               type="button"
               aria-label="Fechar menu"
-              className="fixed inset-0 z-40 bg-zinc-950/40"
+              className="absolute inset-0 bg-zinc-950/40"
               onClick={() => setMobileMenuOpen(false)}
             />
 
@@ -85,7 +90,8 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
-              className="fixed right-0 top-0 z-50 h-dvh w-[85vw] max-w-sm border-l border-zinc-200 bg-white px-6 py-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-950"
+              className="absolute right-0 top-0 z-10 h-dvh w-[85vw] max-w-sm border-l border-zinc-200 bg-white px-6 py-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-950"
+              onClick={(event) => event.stopPropagation()}
             >
               <div className="flex items-center justify-between">
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-zinc-500 dark:text-zinc-400">
@@ -114,7 +120,7 @@ export default function Header() {
                 </div>
               </div>
             </motion.aside>
-          </>
+          </motion.div>
         ) : null}
       </AnimatePresence>
     </header>
