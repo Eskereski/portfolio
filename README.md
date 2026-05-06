@@ -38,13 +38,14 @@ Em vez de um site estático tradicional, este projeto implementa uma **arquitetu
 src/
 ├── app/
 │   ├── api/
-│   │   └── projects/route.ts      # Backend: Endpoint de agregação e Webhook de revalidação
+│   ├── projects/page.tsx          # Server Component: Chama função server-side para obter dados (sem fetch HTTP de loopback)
 │   ├── projects/page.tsx          # Server Component: Consome a API local e renderiza a view
 │   ├── layout.tsx                 # Root layout com injeção de metadata SEO
 │   └── ...
 ├── components/                    # Componentes modulares e reutilizáveis (Header, UI, etc)
 ├── lib/
 │   ├── projects.ts                # Dicionário local para data enrichment (imagens, descrições)
+│   ├── github.ts                  # Lógica centralizada de fetch/enrich/getProjectsData (reutilizada pelo Route Handler e Server Components)
 │   ├── i18n.ts                    # Lógica de internacionalização
 │   └── utils.ts                   # Helpers e validações
 ├── public/
@@ -55,13 +56,13 @@ src/
 
 ## 🔧 Fluxo de Dados (Data Flow)
 
-1. **Requisição** — O Server Component da página de projetos faz uma chamada interna para a rota `/api/projects`.
+1. **Requisição (Server-side)** — O Server Component da página de projetos chama diretamente a função server-side `getProjectsData()` (em `src/lib/github.ts`) para obter os dados. Isso evita requisições HTTP de loopback dentro do ambiente serverless (que causavam 401 / INVALID_REQUEST_METHOD).
 
-2. **Fetch** — O Route Handler autentica com um **Fine-grained PAT** e busca os repositórios atualizados do GitHub.
+2. **Fetch (GitHub)** — A função centralizada `fetchGitHubRepos()` autentica com um **Fine-grained PAT** (padrão `Bearer`) e busca os repositórios atualizados do GitHub.
 
-3. **Enrichment** — A função de agregação faz o merge dos dados da API com o array estático em `src/lib/projects.ts`, inserindo imagens de capa e classificando os projetos em destaque.
+3. **Enrichment** — A função `enrich()` mescla os dados da API com o array estático em `src/lib/projects.ts`, adicionando imagens, tags e flags de destaque.
 
-4. **Cache** — O resultado é formatado e enviado ao frontend, onde sofre cache. O cache só é rompido quando o webhook do GitHub dispara um POST validado para o endpoint.
+4. **Route Handler & Cache** — O Route Handler (`/api/projects`) agora chama `getProjectsData()` também, mas foi mantido principalmente para interoperabilidade (e para receber webhooks). O resultado é cacheado/servido e o webhook POST valida assinaturas HMAC-SHA256 para revalidação on-demand.
 
 ---
 
@@ -71,16 +72,16 @@ A evolução deste projeto foi planejada desde o início com etapas claramente d
 
 ### ✅ Etapas Concluídas
 
-- [x] **Estrutura Inicial do Site** — Página home com hero section, animações e CTA buttons
-- [x] **Menu Header Responsivo** — Navegação com suporte mobile, hamburger menu e dark mode toggle
-- [x] **Páginas Essenciais** — About, Contact, Projects (layout pronto)
-- [x] **Internacionalização (i18n)** — Suporte português (PT) e inglês (EN)
-- [x] **Integração à GitHub API** — Fetch de repositórios com Fine-grained PAT autenticado
-- [x] **Data Enrichment** — Merge de dados da API com metadata local customizada
-- [x] **On-Demand Revalidation** — Webhook com validação HMAC-SHA256
-- [x] **Route Handler /api/projects** — Backend serverless para agregação de dados
-- [x] **Página Projects Dinâmica** — Server Component consumindo API interna
-- [x] **Dark Mode & Responsividade** — Tailwind CSS com suporte completo a light/dark themes
+- ✅ **Estrutura Inicial do Site** — Página home com hero section, animações e CTA buttons
+- ✅ **Menu Header Responsivo** — Navegação com suporte mobile, hamburger menu e dark mode toggle
+- ✅ **Páginas Essenciais** — About, Contact, Projects (layout pronto)
+- ✅ **Internacionalização (i18n)** — Suporte português (PT) e inglês (EN)
+- ✅ **Integração à GitHub API** — Fetch de repositórios com Fine-grained PAT autenticado
+- ✅ **Data Enrichment** — Merge de dados da API com metadata local customizada
+- ✅ **On-Demand Revalidation** — Webhook com validação HMAC-SHA256
+- ✅ **Route Handler /api/projects** — Backend serverless para agregação de dados
+- ✅ **Página Projects Dinâmica** — Server Component consumindo API interna
+- ✅ **Dark Mode & Responsividade** — Tailwind CSS com suporte completo a light/dark themes
 
 ### 📋 Próximas Implementações
 
@@ -89,8 +90,6 @@ A evolução do projeto continua com foco em observabilidade e automação:
 - [ ] **Integração de Analytics** — Configuração do Vercel Analytics para monitoramento de tráfego e comportamento do usuário.
 - [ ] **CI/CD Pipeline** — Implementação de GitHub Actions para rotinas de validação de código (lint/typecheck/formatting) antes do deploy.
 - [ ] **Testes Automatizados** — Cobertura de testes unitários com Vitest nas funções de agregação de dados e validação de schemas.
-- [ ] **Otimizações de SEO Avançado** — Injeção dinâmica de Schema.org (JSON-LD), sitemap.xml automatizado e robots.txt.
-- [ ] **Blog/Artigos** — Integração com MDX para publicação de conteúdo técnico e documentação de aprendizados.
 
 ---
 

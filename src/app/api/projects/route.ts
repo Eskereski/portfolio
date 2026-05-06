@@ -13,19 +13,13 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
-    console.log('[POST /api/projects] Webhook request received');
-    
     const url = new URL(req.url);
     const secret = url.searchParams.get('secret') ?? '';
     const githubSignature = req.headers.get('x-hub-signature-256');
     const envSecret = process.env.REVALIDATION_SECRET ?? process.env.REVALIDATION_TOKEN ?? '';
 
-    console.log('[POST /api/projects] REVALIDATION_SECRET env available:', !!envSecret);
-    console.log('[POST /api/projects] GitHub signature header present:', !!githubSignature);
-    console.log('[POST /api/projects] Query param secret provided:', !!secret);
-
     if (githubSignature) {
-      console.log('[POST /api/projects] Validating GitHub webhook signature');
+      // validating GitHub webhook signature
       if (!envSecret) {
         console.error('[POST /api/projects] REVALIDATION_SECRET not configured');
         return NextResponse.json({ error: 'Server misconfigured: missing REVALIDATION secret' }, { status: 500 });
@@ -39,17 +33,17 @@ export async function POST(req: Request) {
         console.warn('[POST /api/projects] GitHub signature validation failed');
         return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
       }
-      console.log('[POST /api/projects] GitHub signature validated successfully');
+      // GitHub signature validated successfully
     } else {
-      console.log('[POST /api/projects] No GitHub signature - validating query param secret');
+      // No GitHub signature - validating query param secret
       if (!envSecret || secret !== envSecret) {
         console.warn('[POST /api/projects] Secret validation failed - env secret available:', !!envSecret, '- secrets match:', secret === envSecret);
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
       }
-      console.log('[POST /api/projects] Query param secret validated successfully');
+      // Query param secret validated successfully
     }
 
-    console.log('[POST /api/projects] Webhook validated - revalidation successful');
+    // Webhook validated - revalidation successful
     return NextResponse.json({ revalidated: true }, { status: 200 });
   } catch (error: any) {
     console.error('[POST /api/projects] Error:', error.message ?? String(error));
