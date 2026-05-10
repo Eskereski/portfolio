@@ -160,7 +160,7 @@ export function MagicCard(props: MagicCardProps) {
 		>
 			<motion.div
 				aria-hidden="true"
-				className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] p-px opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+				className="pointer-events-none absolute inset-px z-10 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
 				style={{
 					background: useMotionTemplate`
 						radial-gradient(${gradientSize}px circle at ${mouseX}px ${mouseY}px,
@@ -169,17 +169,22 @@ export function MagicCard(props: MagicCardProps) {
 							${borderColor} 100%
 						)
 					`,
+					// A propriedade padding define a espessura exata da borda
+					padding: "1px",
+					// A máscara recorta o centro (content-box) e exibe apenas a área do padding
+					WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+					WebkitMaskComposite: "xor",
+					mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+					maskComposite: "exclude",
 					willChange: "transform, opacity",
 				}}
-			>
-				<div className="h-full w-full rounded-[inherit] bg-white dark:bg-black" />
-			</motion.div>
+			/>
 
 			{mode === "gradient" && (
 				<motion.div
 					suppressHydrationWarning
 					aria-hidden="true"
-					className="pointer-events-none absolute inset-0 z-15 rounded-[inherit] mix-blend-multiply dark:mix-blend-screen"
+					className="pointer-events-none absolute inset-px z-15 rounded-[inherit] mix-blend-multiply dark:mix-blend-screen"
 					style={{
 						background: useMotionTemplate`
 							radial-gradient(${gradientSize}px circle at ${mouseX}px ${mouseY}px,

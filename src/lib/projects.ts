@@ -23,31 +23,7 @@ export const projectsMetadata: ProjectMetadata[] = [
     description:
       'Meu portfolio pessoal desenvolvido com Next.js 16, TypeScript, Tailwind CSS e integrações com GitHub API. Apresenta projetos dinâmicos e metadados enriquecidos.',
     featured: true,
-  },
-  {
-    repoName: 'awesome-project',
-    image: '/images/awesome-project.png',
-    tags: ['TypeScript', 'Node.js', 'Express', 'MongoDB'],
-    description:
-      'Um projeto incrível que demonstra padrões modernos de backend e tratamento de erros robusto.',
-    featured: true,
-  },
-  {
-    repoName: 'learning-react',
-    image: null,
-    tags: ['React', 'JavaScript', 'Educação'],
-    description:
-      'Repositório de estudo e experimentação com React hooks, context API e padrões avançados.',
-    featured: false,
-  },
-  {
-    repoName: 'cli-tool',
-    image: null,
-    tags: ['CLI', 'Node.js', 'Utilities'],
-    description:
-      'Ferramenta de linha de comando para automação de tarefas comuns de desenvolvimento.',
-    featured: false,
-  },
+  }
 ];
 
 /**

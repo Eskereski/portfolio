@@ -68,32 +68,34 @@ export default function Home() {
             gradientOpacity={0.11}
             gradientFrom="#9E7AFF"
             gradientTo="#FE8BBB"
-            className="rounded-3xl p-6 shadow-lg shadow-black/20"
+            className="rounded-3xl shadow-lg shadow-black/20"
           >
-            <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-              O que eu faço
-            </p>
+            <div className="h-full w-full p-6">
+              <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                O que eu faço
+              </p>
 
-            <div className="mt-5 space-y-4">
-              <div className={featureCardClass}>
-                <p className="text-sm font-semibold">Backend</p>
-                <p className="mt-1 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
-                  APIs, autenticação, integrações e modelagem de dados.
-                </p>
-              </div>
+              <div className="mt-5 space-y-4">
+                <div className={featureCardClass}>
+                  <p className="text-sm font-semibold">Backend</p>
+                  <p className="mt-1 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
+                    APIs, autenticação, integrações e modelagem de dados.
+                  </p>
+                </div>
 
-              <div className={featureCardClass}>
-                <p className="text-sm font-semibold">Frontend</p>
-                <p className="mt-1 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
-                  Interfaces limpas, responsivas e intuitivas.
-                </p>
-              </div>
+                <div className={featureCardClass}>
+                  <p className="text-sm font-semibold">Frontend</p>
+                  <p className="mt-1 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
+                    Interfaces limpas, responsivas e intuitivas.
+                  </p>
+                </div>
 
-              <div className={featureCardClass}>
-                <p className="text-sm font-semibold">Projetos</p>
-                <p className="mt-1 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
-                  Portfólio, sistemas internos e produtos com foco em resultado.
-                </p>
+                <div className={featureCardClass}>
+                  <p className="text-sm font-semibold">Projetos</p>
+                  <p className="mt-1 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
+                    Portfólio, sistemas internos e produtos com foco em resultado.
+                  </p>
+                </div>
               </div>
             </div>
           </MagicCard>

@@ -59,7 +59,7 @@ export default function Header() {
               </span>
             </Link>
           ))}
-          <AnimatedThemeToggler className="inline-flex items-center justify-center rounded-full border border-zinc-300 px-3 py-2 text-zinc-900 dark:border-zinc-700 dark:text-zinc-50" />
+          <AnimatedThemeToggler className="inline-flex items-center justify-center rounded-full border border-zinc-300 px-3 py-2 text-zinc-900 dark:border-zinc-700 dark:text-zinc-50 cursor-pointer" />
         </div>
 
         {/* Mobile Menu Button */}
@@ -115,7 +115,7 @@ export default function Header() {
                       </Link>
                     ))}
                     <div className="mt-4">
-                      <AnimatedThemeToggler className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 p-0 text-zinc-700 dark:border-zinc-800 dark:text-zinc-200" />
+                      <AnimatedThemeToggler className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 p-0 text-zinc-700 dark:border-zinc-800 dark:text-zinc-200 cursor-pointer" />
                     </div>
                   </div>
                 </motion.aside>
