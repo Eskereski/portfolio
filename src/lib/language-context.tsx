@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode, useEffect, useCallback } from "react";
-import { defaultLanguage, getHtmlLang, normalizeLanguage, type Language } from "@/lib/i18n";
+import { defaultLanguage, getHtmlLang, languageCookieName, type Language } from "@/lib/i18n";
 
 interface LanguageContextType {
   language: Language;
@@ -10,18 +10,14 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(() => {
-    if (typeof window === "undefined") return defaultLanguage;
-
-    try {
-      const stored = localStorage.getItem("language");
-      if (stored) return normalizeLanguage(stored);
-      return normalizeLanguage(navigator.language);
-    } catch {
-      return defaultLanguage;
-    }
-  });
+export function LanguageProvider({
+  children,
+  initialLanguage = defaultLanguage,
+}: {
+  children: ReactNode;
+  initialLanguage?: Language;
+}) {
+  const [language, setLanguageState] = useState<Language>(initialLanguage);
 
   useEffect(() => {
     try {
@@ -35,6 +31,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLanguageState(lang);
     try {
       localStorage.setItem("language", lang);
+      document.cookie = `${languageCookieName}=${lang}; path=/; max-age=31536000; samesite=lax`;
     } catch {
       // ignore
     }

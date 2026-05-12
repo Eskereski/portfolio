@@ -4,8 +4,10 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { LanguageProvider } from "@/lib/language-context";
+import { cookies } from "next/headers";
 import { Analytics } from "@vercel/analytics/react";
 import ptBRCommon from "@/messages/pt-br/common.json";
+import { defaultLanguage, getHtmlLang, languageCookieName, normalizeLanguage } from "@/lib/i18n";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,13 +29,21 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+async function getInitialLanguage() {
+  const cookieStore = await cookies();
+  const storedLanguage = cookieStore.get(languageCookieName)?.value;
+  return normalizeLanguage(storedLanguage ?? defaultLanguage);
+}
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const initialLanguage = await getInitialLanguage();
+
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html lang={getHtmlLang(initialLanguage)} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -60,7 +70,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col bg-white text-zinc-950 dark:bg-zinc-950 dark:bg-linear-to-b dark:from-zinc-950 dark:to-zinc-900 dark:text-white antialiased`}>
-        <LanguageProvider>
+        <LanguageProvider initialLanguage={initialLanguage}>
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />

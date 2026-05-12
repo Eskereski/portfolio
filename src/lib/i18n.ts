@@ -4,6 +4,7 @@ export const languages = ["pt-br", "en-us"] as const;
 export type Language = (typeof languages)[number];
 
 export const defaultLanguage: Language = "pt-br";
+export const languageCookieName = "language";
 
 export type Namespace = "common";
 export const defaultNamespace: Namespace = "common";
