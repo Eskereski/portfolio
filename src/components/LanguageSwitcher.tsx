@@ -19,6 +19,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   const { language, setLanguage } = useLanguage();
   const { t } = useI18n(language);
   const [isMounted, setIsMounted] = useState(false);
+  const activeMarkerOffset = language === "pt-br" ? 0 : 26;
 
   useEffect(() => {
     setIsMounted(true);
@@ -51,8 +52,8 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
       )}
     >
       <motion.div
-        className="absolute inset-y-0.5 left-0.5 w-1/2 rounded-full bg-zinc-900 dark:bg-white"
-        animate={{ x: language === "pt-br" ? 0 : "100%" }}
+        className="absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-zinc-900 dark:bg-white"
+        animate={{ x: activeMarkerOffset }}
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
         aria-hidden="true"
       />
