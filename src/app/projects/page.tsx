@@ -84,7 +84,7 @@ export default function Projects() {
                           alt={project.name}
                           width={96}
                           height={96}
-                          className="object-cover"
+                          className="h-full w-full object-cover"
                         />
                       ) : (
                         <FaGithub className="h-12 w-12" aria-hidden="true" />

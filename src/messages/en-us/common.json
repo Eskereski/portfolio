@@ -104,7 +104,7 @@
   },
   "projects": {
     "title": "Projects",
-    "description": "List of ongoing and completed projects.",
+    "description": "List of ongoing and completed projects. Dynamically generated from the GitHub API.",
     "emptyState": "No projects found.",
     "openOnGitHub": "View on GitHub",
     "items": {

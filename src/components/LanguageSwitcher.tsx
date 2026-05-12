@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/language-context";
 import { type Language } from "@/lib/i18n";
 import { useI18n } from "@/lib/use-i18n";
@@ -7,15 +8,35 @@ import { motion } from "framer-motion";
 import type { IconType } from "react-icons";
 import { GiBrazilFlag } from "react-icons/gi";
 import { LiaFlagUsaSolid } from "react-icons/lia";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage();
   const { t } = useI18n(language);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const languages: { code: Language; Icon: IconType }[] = [
     { code: "pt-br", Icon: GiBrazilFlag },
     { code: "en-us", Icon: LiaFlagUsaSolid },
   ];
+
+  if (!isMounted) {
+    return (
+      <div className="flex items-center justify-center">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          className="inline-flex items-center justify-center h-8 w-8"
+        >
+          <AiOutlineLoading3Quarters className="h-5 w-5 text-zinc-400 dark:text-zinc-600" />
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative inline-flex items-center justify-between w-14 h-8 rounded-full border border-zinc-200 dark:border-zinc-800 p-0.5 bg-transparent">
