@@ -251,11 +251,11 @@ export const AnimatedThemeToggler = ({
       )}
       {...props}
     >
-      <span className="relative block h-5 w-5">
+      <span className="relative block h-4 w-4">
         <Sun
           aria-hidden="true"
           className={cn(
-            "absolute inset-0 h-5 w-5 text-current transition-all duration-200 ease-out",
+            "absolute inset-0 h-4 w-4 text-current transition-all duration-200 ease-out",
             !isDark
               ? "opacity-100 rotate-0 scale-100 group-hover:opacity-0 group-hover:-rotate-90 group-hover:scale-75"
               : "opacity-0 rotate-90 scale-75 group-hover:opacity-100 group-hover:rotate-0 group-hover:scale-100"
@@ -264,7 +264,7 @@ export const AnimatedThemeToggler = ({
         <Moon
           aria-hidden="true"
           className={cn(
-            "absolute inset-0 h-5 w-5 text-current transition-all duration-200 ease-out",
+            "absolute inset-0 h-4 w-4 text-current transition-all duration-200 ease-out",
             isDark
               ? "opacity-100 rotate-0 scale-100 group-hover:opacity-0 group-hover:rotate-90 group-hover:scale-75"
               : "opacity-0 -rotate-90 scale-75 group-hover:opacity-100 group-hover:rotate-0 group-hover:scale-100"

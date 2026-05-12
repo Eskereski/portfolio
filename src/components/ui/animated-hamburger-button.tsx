@@ -6,12 +6,17 @@ type AnimatedHamburgerButtonProps = {
   active: boolean;
   onClick: () => void;
   className?: string;
+  labels?: {
+    open: string;
+    close: string;
+  };
 };
 
 export function AnimatedHamburgerButton({
   active,
   onClick,
   className = "",
+  labels,
 }: AnimatedHamburgerButtonProps) {
   return (
     <MotionConfig
@@ -26,7 +31,7 @@ export function AnimatedHamburgerButton({
         animate={active ? "open" : "closed"}
         onClick={onClick}
         aria-expanded={active}
-        aria-label={active ? "Fechar menu" : "Abrir menu"}
+        aria-label={active ? labels?.close ?? "" : labels?.open ?? ""}
         className={`relative h-20 w-20 rounded-full bg-white/0 text-zinc-900 transition-colors hover:bg-zinc-200/60 dark:text-white dark:hover:bg-white/20 ${className}`}
       >
         <motion.span

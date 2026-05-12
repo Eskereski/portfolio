@@ -5,14 +5,17 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { getNavLinks } from "@/lib/navigation";
 import { useLanguage } from "@/lib/language-context";
+import { useI18n } from "@/lib/use-i18n";
 import { AnimatePresence, motion } from "framer-motion";
 import { AnimatedHamburgerButton } from "@/components/ui/animated-hamburger-button";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { language } = useLanguage();
-  const navLinks = getNavLinks(language);
+  const { t } = useI18n(language);
+  const navLinks = getNavLinks(t);
   const canRenderPortal = typeof document !== "undefined";
 
   useEffect(() => {
@@ -59,7 +62,9 @@ export default function Header() {
               </span>
             </Link>
           ))}
-          <AnimatedThemeToggler className="inline-flex items-center justify-center rounded-full border border-zinc-300 px-3 py-2 text-zinc-900 dark:border-zinc-700 dark:text-zinc-50 cursor-pointer" />
+          <LanguageSwitcher />
+
+          <AnimatedThemeToggler className="inline-flex items-center justify-center rounded-full border border-zinc-300 px-2 py-1 text-zinc-900 dark:border-zinc-700 dark:text-zinc-50 cursor-pointer" />
         </div>
 
         {/* Mobile Menu Button */}
@@ -67,6 +72,7 @@ export default function Header() {
           <AnimatedHamburgerButton
             active={mobileMenuOpen}
             onClick={() => setMobileMenuOpen((previous) => !previous)}
+            labels={{ open: t("ui.hamburger.open"), close: t("ui.hamburger.close") }}
             className="h-10 w-10 text-zinc-900 dark:text-white"
           />
         </div>
@@ -83,7 +89,7 @@ export default function Header() {
               >
                 <button
                   type="button"
-                  aria-label="Fechar menu"
+                  aria-label={t("header.closeMenu")}
                   className="absolute inset-0 bg-zinc-950/40"
                   onClick={() => setMobileMenuOpen(false)}
                 />
@@ -97,7 +103,7 @@ export default function Header() {
                 >
                   <div className="flex items-center justify-between">
                     <p className="text-sm font-semibold uppercase tracking-[0.3em] text-zinc-500 dark:text-zinc-400">
-                      Menu
+                      {t("header.menu")}
                     </p>
                   </div>
 
@@ -114,7 +120,9 @@ export default function Header() {
                         </span>
                       </Link>
                     ))}
-                    <div className="mt-4">
+                    <div className="mt-4 flex items-center gap-3">
+                      <LanguageSwitcher />
+
                       <AnimatedThemeToggler className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 p-0 text-zinc-700 dark:border-zinc-800 dark:text-zinc-200 cursor-pointer" />
                     </div>
                   </div>

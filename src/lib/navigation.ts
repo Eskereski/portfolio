@@ -1,17 +1,21 @@
-import { getTranslation, Language, defaultLanguage } from "./i18n";
+import type { Translator } from "./i18n";
 
-export function getNavLinks(language: Language = defaultLanguage) {
-  const t = getTranslation(language);
-  return [
-    { label: t.nav.home, href: "/" },
-    { label: t.nav.about, href: "/about" },
-    { label: t.nav.projects, href: "/projects" },
-    { label: t.nav.contact, href: "/contact" },
-  ];
+const navLinkDefs = [
+  { key: "nav.home", href: "/" },
+  { key: "nav.about", href: "/about" },
+  { key: "nav.projects", href: "/projects" },
+  { key: "nav.contact", href: "/contact" },
+] as const;
+
+export function getNavLinks(t: Translator) {
+  return navLinkDefs.map((link) => ({
+    label: t(link.key),
+    href: link.href,
+  }));
 }
 
 export const socialLinks = [
-  { label: "GitHub", href: "https://github.com/Eskereski", icon: "github" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/demétrius-eskereski/", icon: "linkedin" },
-  { label: "Email", href: "mailto:d.eskereski@hotmail.com", icon: "email" },
+  { labelKey: "footer.social.github", href: "https://github.com/Eskereski", icon: "github" },
+  { labelKey: "footer.social.linkedin", href: "https://linkedin.com/in/demétrius-eskereski/", icon: "linkedin" },
+  { labelKey: "footer.social.email", href: "mailto:d.eskereski@hotmail.com", icon: "email" },
 ];

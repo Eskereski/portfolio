@@ -18,10 +18,9 @@ export interface ProjectMetadata {
 export const projectsMetadata: ProjectMetadata[] = [
   {
     repoName: 'portfolio',
-    image: '/images/portfolio.png',
+    image: '/images/projects/portfolio.png',
     tags: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'Framer Motion'],
-    description:
-      'Meu portfolio pessoal desenvolvido com Next.js 16, TypeScript, Tailwind CSS e integrações com GitHub API. Apresenta projetos dinâmicos e metadados enriquecidos.',
+    description: '',
     featured: true,
   }
 ];
@@ -46,7 +45,7 @@ export function generateDefaultMetadata(
   return {
     image: null,
     tags,
-    description: `Repositório: ${readableName}. Adicione uma descrição customizada em projectsMetadata para mais detalhes.`,
+    description: '',
     featured: false,
   };
 }

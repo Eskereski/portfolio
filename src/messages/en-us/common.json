@@ -1,0 +1,148 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "header": {
+    "menu": "Menu",
+    "navigation": "Navigation",
+    "closeMenu": "Close menu"
+  },
+  "languageSwitcher": {
+    "ariaLabel": {
+      "ptBr": "Switch to Portuguese",
+      "enUs": "Switch to English"
+    }
+  },
+  "ui": {
+    "hamburger": {
+      "open": "Open menu",
+      "close": "Close menu"
+    }
+  },
+  "home": {
+    "eyebrow": "Backend first",
+    "title": "I build web applications focusing on backend, performance, and usability.",
+    "description": "I am a full stack developer, but I prefer working closer to the logic, API, and structure that supports the product. I built this page to showcase some of my projects, skills, and ways to get in touch.",
+    "cta": {
+      "projects": "View projects",
+      "contact": "Contact me",
+      "resume": "Resume"
+    },
+    "features": {
+      "sectionTitle": "What I do",
+      "backend": {
+        "title": "Backend",
+        "description": "APIs, authentication, integrations, and data modeling."
+      },
+      "frontend": {
+        "title": "Frontend",
+        "description": "Clean, responsive, and intuitive interfaces."
+      },
+      "projects": {
+        "title": "Projects",
+        "description": "Portfolio, internal systems, and result-oriented products."
+      }
+    },
+    "placeholder": {
+      "eyebrow": "Placeholder",
+      "title": "Next section reserved",
+      "description": "This space is ready to receive the next sections of the portfolio."
+    }
+  },
+  "about": {
+    "title": "About me",
+    "intro": {
+      "paragraph1": "I am a full stack developer with a passion for backend and robust solutions. With experience in Node.js, TypeScript, and API architecture, I enjoy solving complex problems with clean and well-organized code.",
+      "paragraph2": "My main focus is on the backend, but I have experience and am comfortable with the frontend using React and Next.js. I believe the best solution is when the frontend and backend work harmoniously together.",
+      "paragraph3": "I prioritize strategic alignment and clarity in information exchange. I believe efficient software development depends on synchronized teams, where clear communication is the foundation for transforming complex requirements into functional solutions."
+    },
+    "skills": {
+      "title": "Technical Skills",
+      "categories": {
+        "programming": {
+          "title": "Programming Languages",
+          "description": "Python • C/C++ • Java • JavaScript / TypeScript"
+        },
+        "cloudBackend": {
+          "title": "Cloud and Backend",
+          "description": "AWS (Lambda, managed services) • Node.js • REST APIs • System integrations • Asynchronous processing • Data modeling"
+        },
+        "databaseBi": {
+          "title": "Database and BI",
+          "description": "SQL • Power BI"
+        },
+        "frontend": {
+          "title": "Frontend Ecosystem",
+          "description": "React • Tailwind CSS • Next.js • HTML • CSS"
+        },
+        "toolsDevops": {
+          "title": "Tools and DevOps",
+          "description": "Git • GitHub • GitHub Actions • Environment variable management and credential security"
+        }
+      }
+    },
+    "operations": {
+      "title": "Operational Competencies",
+      "methodologies": {
+        "title": "Methodologies",
+        "items": {
+          "item1": "Applied programming logic",
+          "item2": "Modular code structuring",
+          "item3": "Pragmatic technical problem solving",
+          "item4": "Agile methodologies: Scrum and Kanban",
+          "item5": "Ability to adapt to new technology stacks"
+        }
+      }
+    },
+    "languages": {
+      "title": "Languages",
+      "description": "English (Advanced) • Spanish (Intermediate) • Portuguese (Native)"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "List of ongoing and completed projects.",
+    "emptyState": "No projects found.",
+    "openOnGitHub": "View on GitHub",
+    "items": {
+      "portfolio": {
+        "description": "My web portfolio built with Next.js."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact me",
+    "description": {
+      "paragraph1": "I am always open to discussing new projects, ideas, and opportunities.",
+      "paragraph2": "Feel free to reach out through the channels below."
+    },
+    "cards": {
+      "email": {
+        "label": "Email"
+      },
+      "github": {
+        "label": "GitHub",
+        "description": "View my projects and contributions"
+      },
+      "linkedin": {
+        "label": "LinkedIn",
+        "description": "Connect with me"
+      }
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 Eskereski. All rights reserved.",
+    "social": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "email": "Email"
+    }
+  },
+  "metadata": {
+    "title": "Demétrius Eskereski | Backend & Full Stack Developer",
+    "description": "Portfolio of Demétrius Eskereski, a developer focused on backend, software architecture, and web solutions."
+  }
+}

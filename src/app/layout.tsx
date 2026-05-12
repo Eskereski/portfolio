@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { LanguageProvider } from "@/lib/language-context";
 import { Analytics } from "@vercel/analytics/react";
+import ptBRCommon from "@/messages/pt-br/common.json";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Eskereski | Full Stack Developer",
-  description: "Portfolio showcasing backend-focused projects and skills",
+  title: (ptBRCommon.metadata as Record<string, string>).title,
+  description: (ptBRCommon.metadata as Record<string, string>).description,
 };
 
 export const viewport: Viewport = {
@@ -58,7 +59,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="flex min-h-screen flex-col bg-white text-zinc-950 dark:bg-zinc-950 dark:bg-linear-to-b dark:from-zinc-950 dark:to-zinc-900 dark:text-white antialiased">
+      <body className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col bg-white text-zinc-950 dark:bg-zinc-950 dark:bg-linear-to-b dark:from-zinc-950 dark:to-zinc-900 dark:text-white antialiased`}>
         <LanguageProvider>
           <Header />
           <main className="flex-1">{children}</main>

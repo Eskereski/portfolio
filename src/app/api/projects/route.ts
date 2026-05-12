@@ -6,8 +6,9 @@ export async function GET() {
   try {
     const projects = await getProjectsData();
     return NextResponse.json({ projects }, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message ?? 'unknown' }, { status: 500 });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    return NextResponse.json({ error: message ?? 'unknown' }, { status: 500 });
   }
 }
 
@@ -45,8 +46,9 @@ export async function POST(req: Request) {
 
     // Webhook validated - revalidation successful
     return NextResponse.json({ revalidated: true }, { status: 200 });
-  } catch (error: any) {
-    console.error('[POST /api/projects] Error:', error.message ?? String(error));
-    return NextResponse.json({ error: error.message ?? 'unknown' }, { status: 500 });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error('[POST /api/projects] Error:', message);
+    return NextResponse.json({ error: message ?? 'unknown' }, { status: 500 });
   }
 }

@@ -5,15 +5,20 @@ import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
 import { socialLinks } from "@/lib/navigation";
+import { useLanguage } from "@/lib/language-context";
+import { useI18n } from "@/lib/use-i18n";
 
 export default function Footer() {
+  const { language } = useLanguage();
+  const { t } = useI18n(language);
+
   return (
     <footer className="bg-transparent text-zinc-900 dark:text-zinc-50">
       <div className="mx-auto max-w-6xl px-6 py-12 sm:px-8">
         <div className="flex items-center justify-between">
           {/* Copyright */}
           <div className="text-sm text-zinc-600 dark:text-zinc-400">
-            © 2026 Eskereski. Todos os direitos reservados.
+            {t("footer.copyright")}
           </div>
 
           {/* Social */}
@@ -24,7 +29,7 @@ export default function Footer() {
                 href={link.href}
                 target={link.icon === "email" ? undefined : "_blank"}
                 rel={link.icon === "email" ? undefined : "noopener noreferrer"}
-                aria-label={link.label}
+                aria-label={t(link.labelKey)}
                 whileHover={{ 
                   y: -4,
                   boxShadow: "0 8px 16px rgba(0, 0, 0, 0.15)"
