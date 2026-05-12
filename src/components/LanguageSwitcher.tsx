@@ -9,8 +9,13 @@ import type { IconType } from "react-icons";
 import { GiBrazilFlag } from "react-icons/gi";
 import { LiaFlagUsaSolid } from "react-icons/lia";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { cn } from "@/lib/utils";
 
-export function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  className?: string;
+}
+
+export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   const { language, setLanguage } = useLanguage();
   const { t } = useI18n(language);
   const [isMounted, setIsMounted] = useState(false);
@@ -39,7 +44,12 @@ export function LanguageSwitcher() {
   }
 
   return (
-    <div className="relative inline-flex items-center justify-between w-14 h-8 rounded-full border border-zinc-200 dark:border-zinc-800 p-0.5 bg-transparent">
+    <div
+      className={cn(
+        "relative inline-flex h-8 w-14 items-center justify-between rounded-full border p-0.5 bg-transparent",
+        className
+      )}
+    >
       <motion.div
         className="absolute inset-y-0.5 left-0.5 w-1/2 rounded-full bg-zinc-900 dark:bg-white"
         animate={{ x: language === "pt-br" ? 0 : "100%" }}

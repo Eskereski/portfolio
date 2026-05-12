@@ -1,4 +1,5 @@
 import ptBRCommon from "@/messages/pt-br/common.json";
+import enUSCommon from "@/messages/en-us/common.json";
 
 export const languages = ["pt-br", "en-us"] as const;
 export type Language = (typeof languages)[number];
@@ -16,6 +17,9 @@ export type Translator = (key: string, params?: TranslateParams) => string;
 const preloadedMessages: Partial<Record<Language, Partial<Record<Namespace, Messages>>>> = {
   "pt-br": {
     common: ptBRCommon as unknown as Messages,
+  },
+  "en-us": {
+    common: enUSCommon as unknown as Messages,
   },
 };
 
@@ -55,10 +59,7 @@ const messageLoaders = {
     common: () => Promise.resolve(preloadedMessages["pt-br"]?.common ?? ({} as Messages)),
   },
   "en-us": {
-    common: () =>
-      import("@/messages/en-us/common.json").then(
-        (module) => module.default as Messages
-      ),
+    common: () => Promise.resolve(preloadedMessages["en-us"]?.common ?? ({} as Messages)),
   },
 } as const satisfies Record<Language, Record<Namespace, Loader>>;
 
