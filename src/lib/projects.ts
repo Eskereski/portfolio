@@ -22,6 +22,13 @@ export const projectsMetadata: ProjectMetadata[] = [
     tags: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'Framer Motion'],
     description: '',
     featured: true,
+  },
+  {
+    repoName: 'Fundamentos-de-Sistemas-Web',
+    image: '/images/projects/petshop.png',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
+    description: 'Site de uma loja de petshop, desenvolvido como projeto final da disciplina de Fundamentos de Sistemas Web.',
+    featured: true,
   }
 ];
 
