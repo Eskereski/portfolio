@@ -52,6 +52,16 @@
       "description": "This space is ready to receive the next sections of the portfolio."
     }
   },
+  "chatInterface": {
+    "eyebrow": "Virtual assistant",
+    "title": "Ask about my work",
+    "description": "Streaming answers about my professional profile, powered by Gemini.",
+    "inputPlaceholder": "Type your question about my profile...",
+    "sendButton": "Send",
+    "emptyState": "Start with a question about my experience, stack, or role.",
+    "statusThinking": "Thinking...",
+    "error": "Something went wrong. Please try again."
+  },
   "about": {
     "title": "About me",
     "intro": {

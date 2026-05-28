@@ -1,6 +1,7 @@
 "use client";
 
 import { IoMdDownload } from "react-icons/io";
+import { ChatInterface } from "@/components/ChatInterface";
 import { Particles } from "@/components/ui/particles";
 import { MagicCard } from "@/components/ui/magic-card";
 import { useLanguage } from "@/lib/language-context";
@@ -108,17 +109,7 @@ export default function Home() {
       </section>
 
       <section className="mx-auto mt-24 w-full max-w-6xl px-6 sm:px-8">
-        <div className="rounded-3xl border border-dashed border-zinc-300/80 bg-zinc-50/70 p-8 shadow-sm shadow-zinc-900/5 dark:border-zinc-700 dark:bg-white/5 dark:shadow-black/20 sm:p-10">
-          <p className="text-sm font-medium uppercase tracking-[0.35em] text-zinc-500 dark:text-zinc-400">
-            {t("home.placeholder.eyebrow")}
-          </p>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
-            {t("home.placeholder.title")}
-          </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-zinc-600 dark:text-zinc-300">
-            {t("home.placeholder.description")}
-          </p>
-        </div>
+        <ChatInterface />
       </section>
     </main>
   );

@@ -52,6 +52,16 @@
       "description": "Este espaço está pronto para receber as próximas seções do portfólio."
     }
   },
+  "chatInterface": {
+    "eyebrow": "Assistente virtual",
+    "title": "Pergunte sobre meu trabalho",
+    "description": "Respostas em streaming sobre meu perfil profissional, usando Gemini.",
+    "inputPlaceholder": "Digite sua pergunta sobre meu perfil...",
+    "sendButton": "Enviar",
+    "emptyState": "Comece com uma pergunta sobre minha experiência, stack ou atuação.",
+    "statusThinking": "Pensando...",
+    "error": "Algo deu errado. Tente novamente."
+  },
   "about": {
     "title": "Sobre mim",
     "intro": {
