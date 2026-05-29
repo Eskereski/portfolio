@@ -1,14 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useLanguage } from "@/lib/language-context";
-import { type Language } from "@/lib/i18n";
 import { useI18n } from "@/lib/use-i18n";
-import { motion } from "framer-motion";
-import type { IconType } from "react-icons";
-import { GiBrazilFlag } from "react-icons/gi";
-import { LiaFlagUsaSolid } from "react-icons/lia";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 
 interface LanguageSwitcherProps {
@@ -18,65 +12,43 @@ interface LanguageSwitcherProps {
 export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   const { language, setLanguage } = useLanguage();
   const { t } = useI18n(language);
-  const [isMounted, setIsMounted] = useState(false);
-  const activeMarkerOffset = language === "pt-br" ? 0 : 26;
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const languages: { code: Language; Icon: IconType }[] = [
-    { code: "pt-br", Icon: GiBrazilFlag },
-    { code: "en-us", Icon: LiaFlagUsaSolid },
-  ];
-
-  if (!isMounted) {
-    return (
-      <div className="flex items-center justify-center">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          className="inline-flex items-center justify-center h-8 w-8"
-        >
-          <AiOutlineLoading3Quarters className="h-5 w-5 text-zinc-400 dark:text-zinc-600" />
-        </motion.div>
-      </div>
-    );
-  }
+  const nextLanguage = language === "pt-br" ? "en-us" : "pt-br";
+  const currentLanguageLabel = language === "pt-br" ? "PT-BR" : "EN-US";
 
   return (
-    <div
+    <button
+      type="button"
+      onClick={() => setLanguage(nextLanguage)}
       className={cn(
-        "relative inline-flex h-8 w-14 items-center justify-between rounded-full border p-0.5 bg-transparent",
+        "group cursor-pointer bg-transparent transition-transform duration-150 ease-out hover:-translate-y-0.5 hover:scale-[1.02]",
+        "transition-colors duration-150 ease-out hover:border-zinc-700 hover:bg-zinc-950 hover:text-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:hover:border-zinc-300 dark:hover:bg-white dark:hover:text-zinc-900 dark:focus-visible:ring-zinc-600 dark:focus-visible:ring-offset-zinc-950",
         className
       )}
+      aria-label={
+        nextLanguage === "pt-br"
+          ? t("languageSwitcher.ariaLabel.ptBr")
+          : t("languageSwitcher.ariaLabel.enUs")
+      }
+      title={currentLanguageLabel}
     >
-      <motion.div
-        className="absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-zinc-900 dark:bg-white"
-        animate={{ x: activeMarkerOffset }}
-        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-        aria-hidden="true"
-      />
-
-      {languages.map((lang) => {
-        const Icon = lang.Icon;
-        const active = language === lang.code;
-        return (
-          <button
-            key={lang.code}
-            onClick={() => setLanguage(lang.code)}
-            className={`relative z-10 inline-flex items-center justify-center h-6 w-6 rounded-full transition ${
-              active
-                ? "text-white dark:text-zinc-900 cursor-default"
-                : "text-zinc-600 dark:text-zinc-300 cursor-pointer"
-            }`}
-            aria-pressed={active}
-            aria-label={lang.code === "pt-br" ? t("languageSwitcher.ariaLabel.ptBr") : t("languageSwitcher.ariaLabel.enUs")}
-          >
-            <Icon className="h-4 w-4" aria-hidden="true" />
-          </button>
-        );
-      })}
-    </div>
+      <span className="relative block h-4 w-4">
+        <Image
+          src={`/icons/${language}.png`}
+          alt=""
+          width={24}
+          height={24}
+          className="absolute inset-0 h-4 w-4 rounded-full object-cover opacity-100 rotate-0 scale-100 transition-all duration-200 ease-out group-hover:opacity-0 group-hover:-rotate-90 group-hover:scale-75"
+          aria-hidden="true"
+        />
+        <Image
+          src={`/icons/${nextLanguage}.png`}
+          alt=""
+          width={24}
+          height={24}
+          className="absolute inset-0 h-4 w-4 rounded-full object-cover opacity-0 rotate-90 scale-75 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:rotate-0 group-hover:scale-100"
+          aria-hidden="true"
+        />
+      </span>
+    </button>
   );
 }

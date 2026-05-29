@@ -14,17 +14,17 @@ export default function Home() {
     "rounded-2xl border border-zinc-200/80 bg-zinc-100/80 p-4 shadow-sm shadow-zinc-900/5 dark:border-white/10 dark:bg-white/5 dark:shadow-black/20";
 
   return (
-    <main className="min-h-screen pb-16">
+    <main className="relative isolate min-h-screen overflow-hidden pb-16">
+      <Particles
+        className="absolute inset-0 z-0 h-full w-full opacity-80 dark:opacity-50"
+        quantity={130}
+        size={0.45}
+        color="#71717a"
+      />
+
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_top,rgba(113,113,122,0.05),transparent_50%)] dark:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)]" />
+
       <section className="relative isolate w-full overflow-hidden">
-        <Particles
-          className="absolute inset-0 h-full w-full opacity-80 dark:opacity-50"
-          quantity={90}
-          size={0.45}
-          color="#71717a"
-        />
-
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(113,113,122,0.05),transparent_50%)] dark:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)]" />
-
         <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pt-10 sm:px-8 sm:pt-16 lg:pt-24">
           <div className="grid gap-12 lg:grid-cols-[1.4fr_0.9fr] lg:items-center">
             <div>
@@ -108,7 +108,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto mt-24 w-full max-w-6xl px-6 sm:px-8">
+      <section className="relative z-10 mx-auto mt-24 w-full max-w-6xl px-6 sm:px-8">
         <ChatInterface />
       </section>
     </main>
