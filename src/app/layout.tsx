@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SiteBackground } from "@/components/SiteBackground";
 import { LanguageProvider } from "@/lib/language-context";
 import { cookies } from "next/headers";
 import { Analytics } from "@vercel/analytics/react";
@@ -69,11 +70,14 @@ export default async function RootLayout({
           }}
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col bg-white text-zinc-950 dark:bg-zinc-950 dark:bg-linear-to-b dark:from-zinc-950 dark:to-zinc-900 dark:text-white antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col bg-white text-zinc-950 dark:bg-zinc-950 dark:text-white antialiased`}>
         <LanguageProvider initialLanguage={initialLanguage}>
+          <SiteBackground />
           <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <main className="relative z-10 flex-1">{children}</main>
+          <div className="relative z-10">
+            <Footer />
+          </div>
           <Analytics />
         </LanguageProvider>
       </body>
