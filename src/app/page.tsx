@@ -46,7 +46,7 @@ export default function Home() {
                 </a>
 
                 <a
-                  href="/curriculo.pdf"
+                  href={language === "en-us" ? "/resume.pdf" : "/curriculo.pdf"}
                   download
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-300 px-6 py-3 text-sm font-medium text-zinc-900 transition duration-200 ease-out transform-gpu hover:scale-[1.04] hover:bg-zinc-100 hover:shadow-[0_0_22px_rgba(253,224,71,0.2)] focus-visible:scale-[1.04] focus-visible:bg-zinc-100 focus-visible:shadow-[0_0_22px_rgba(253,224,71,0.2)] focus-visible:outline-none dark:border-zinc-700 dark:text-zinc-50 dark:hover:bg-zinc-900 dark:hover:shadow-[0_0_18px_rgba(255,255,255,0.12)] dark:focus-visible:bg-zinc-900 dark:focus-visible:shadow-[0_0_18px_rgba(255,255,255,0.12)]"
                 >
